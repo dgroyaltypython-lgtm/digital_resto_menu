@@ -1,0 +1,84 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+
+<div style="
+    max-width: 900px;
+    margin: 30px auto;
+">
+
+    <div style="
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 10px 35px rgba(0,0,0,.08);
+    ">
+
+        <h1>
+            🍽️ Menu Import / Export
+        </h1>
+
+        <p style="color:#666;">
+            Manage the complete Coastal Pearl restaurant menu
+            using Excel.
+        </p>
+
+        <hr>
+
+        <h2>
+            📤 Export Current Menu
+        </h2>
+
+        <p>
+            Download the current live menu from the database.
+        </p>
+
+        <a href="{% url 'admin_menu_export' %}" class="button">
+            📥 Download Menu Excel
+        </a>
+
+        <hr style="margin:30px 0;">
+
+        <h2>
+            📥 Import Menu
+        </h2>
+
+        <p>
+            Upload your updated Excel menu.
+        </p>
+
+        <form method="post" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <input type="file" name="menu_file" accept=".xlsx" required style="
+                    display:block;
+                    margin:20px 0;
+                ">
+
+            <button type="submit" class="default">
+                🚀 Import Menu
+            </button>
+
+        </form>
+
+        <hr>
+
+        <h3>
+            Excel Format
+        </h3>
+
+        <p>
+            The Excel file should contain:
+        </p>
+
+        <code>
+            Category | Item Name | Marathi Name | Price |
+            Item Type | Available | Active | Sort Order
+        </code>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,707 @@
+{% load static %}
+
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <title>Coastal Pearl · Live Counter</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="{% static 'css/app.css' %}" rel="stylesheet">
+
+
+</head>
+
+<body class="counter">
+
+
+    <!-- Ambient background -->
+    <div class="ambient a1"></div>
+    <div class="ambient a2"></div>
+
+    <!-- Custom notification sound -->
+    <audio id="serviceBell" preload="auto">
+        <source src="{% static 'audio/service-bell.mp3' %}" type="audio/mpeg">
+        Your browser does not support audio.
+    </audio>
+
+    <!-- Header -->
+    <header class="container-fluid p-3">
+
+        <div class="glass counter-top">
+
+            <div>
+                <div class="eyebrow">
+                    GROUP OF BBN
+                </div>
+
+                <h1>
+                    Coastal Pearl
+                    <span>· Live Counter</span>
+                </h1>
+
+                <div class="counter-status">
+                    <span class="status-dot"></span>
+                    Counter Monitoring Active
+                </div>
+            </div>
+
+            <div class="controls">
+
+                <button id="enable" type="button">
+                    🔊 ENABLE RINGER
+                </button>
+
+                <button id="test" type="button">
+                    🔔 TEST SOUND
+                </button>
+
+                <a href="{% url 'portal:counter_logout' %}">
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- Main dashboard -->
+    <main class="container-fluid px-3 pb-5">
+
+        <!-- Statistics -->
+        <div class="stats">
+
+            <div class="glass stat">
+
+                <div class="stat-icon">
+                    🔴
+                </div>
+
+                <div>
+                    <small>Pending</small>
+                    <b id="pending">0</b>
+                </div>
+
+            </div>
+
+
+            <div class="glass stat">
+
+                <div class="stat-icon">
+                    🟡
+                </div>
+
+                <div>
+                    <small>Acknowledged</small>
+                    <b id="ack">0</b>
+                </div>
+
+            </div>
+
+
+            <div class="glass stat">
+
+                <div class="stat-icon">
+                    🔔
+                </div>
+
+                <div>
+                    <small>Last Alert</small>
+                    <b id="last">—</b>
+                </div>
+
+            </div>
+
+
+            <div class="glass stat">
+
+                <div class="stat-icon">
+                    ⚡
+                </div>
+
+                <div>
+                    <small>System</small>
+                    <b id="sys">READY</b>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Ringer settings -->
+        <section class="glass ringer-settings">
+
+            <div class="ringer-title">
+
+                <div>
+                    <div class="eyebrow">
+                        NOTIFICATION SETTINGS
+                    </div>
+
+                    <h3>
+                        🔔 Service Call Ringer
+                    </h3>
+
+                    <p>
+                        Your customised sound will play whenever a new table
+                        requests service.
+                    </p>
+                </div>
+
+                <div id="ringerStatus" class="ringer-status off">
+                    ● RINGER OFF
+                </div>
+
+            </div>
+
+
+            <div class="ringer-controls">
+
+                <!-- Sound -->
+                <div class="setting-box">
+
+                    <label for="soundSelect">
+                        Ring Sound
+                    </label>
+
+                    <select id="soundSelect" class="form-select glass-input">
+
+                        <option value="service-bell.mp3">
+                            🔔 Coastal Pearl Service Bell
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Volume -->
+                <div class="setting-box">
+
+                    <label for="volumeControl">
+                        Volume
+                        <span id="volumeValue">80%</span>
+                    </label>
+
+                    <input id="volumeControl" type="range" min="0" max="100" value="80" step="1">
+
+                </div>
+
+
+                <!-- Repeat -->
+                <div class="setting-box">
+
+                    <label for="repeatControl">
+                        Ring Count
+                    </label>
+
+                    <select id="repeatControl" class="form-select glass-input">
+
+                        <option value="1">
+                            1 Ring
+                        </option>
+
+                        <option value="2">
+                            2 Rings
+                        </option>
+
+                        <option value="3" selected>
+                            3 Rings
+                        </option>
+
+                        <option value="4">
+                            4 Rings
+                        </option>
+
+                        <option value="5">
+                            5 Rings
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Test -->
+                <div class="setting-box test-box">
+
+                    <label>
+                        Sound Test
+                    </label>
+
+                    <button id="settingsTest" type="button" class="test-sound-btn">
+                        🔔 Play Custom Sound
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Live queue -->
+        <section class="glass board">
+
+            <div class="board-head">
+
+                <div>
+
+                    <div class="eyebrow">
+                        REAL-TIME SERVICE QUEUE
+                    </div>
+
+                    <h2>
+                        Table Calls
+                    </h2>
+
+                    <p class="queue-description">
+                        New customer requests appear automatically.
+                    </p>
+
+                </div>
+
+                <span id="live">
+                    ● LIVE
+                </span>
+
+            </div>
+
+
+            <div id="calls" class="calls">
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        🪼
+                    </div>
+
+                    <strong>
+                        All quiet for now
+                    </strong>
+
+                    <span>
+                        New calls appear automatically.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- New call overlay -->
+    <div id="overlay" class="overlay">
+
+        <div class="glass alert">
+
+            <div class="ring">
+                🔔
+            </div>
+
+            <div class="eyebrow">
+                NEW TABLE CALL
+            </div>
+
+            <strong id="otable">
+                T01
+            </strong>
+
+            <b id="otype">
+                SERVICE
+            </b>
+
+            <div class="alert-message">
+                Customer is requesting assistance.
+            </div>
+
+            <button id="oack" class="primary" type="button">
+                ✓ ACKNOWLEDGE
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- API endpoints -->
+    <script>
+        window.API = {
+            calls: "{% url 'service_calls' %}"
+        };
+
+        window.COUNTER_CONFIG = {
+            soundPath: "{% static 'audio/' %}",
+            defaultSound: "service-bell.mp3",
+            pollInterval: 2000
+        };
+    </script>
+
+
+    <!-- Counter JavaScript -->
+    <script src="{% static 'js/counter.js' %}"></script>
+
+
+    <!-- Custom ringer controller -->
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const bell = document.getElementById("serviceBell");
+
+            const enableButton = document.getElementById("enable");
+
+            const testButton = document.getElementById("test");
+
+            const settingsTest =
+                document.getElementById("settingsTest");
+
+            const volumeControl =
+                document.getElementById("volumeControl");
+
+            const volumeValue =
+                document.getElementById("volumeValue");
+
+            const repeatControl =
+                document.getElementById("repeatControl");
+
+            const soundSelect =
+                document.getElementById("soundSelect");
+
+            const ringerStatus =
+                document.getElementById("ringerStatus");
+
+
+            let ringerEnabled = false;
+
+
+            /*
+             * Restore saved settings
+             */
+
+            const savedVolume =
+                localStorage.getItem("coastalPearlVolume");
+
+            const savedRepeat =
+                localStorage.getItem("coastalPearlRepeat");
+
+            const savedSound =
+                localStorage.getItem("coastalPearlSound");
+
+
+            if (savedVolume !== null) {
+
+                volumeControl.value = savedVolume;
+
+            }
+
+
+            if (savedRepeat !== null) {
+
+                repeatControl.value = savedRepeat;
+
+            }
+
+
+            if (savedSound !== null) {
+
+                soundSelect.value = savedSound;
+
+                bell.src =
+                    window.COUNTER_CONFIG.soundPath +
+                    savedSound;
+
+            }
+
+
+            updateVolume();
+
+
+            /*
+             * Update volume
+             */
+
+            function updateVolume() {
+
+                const volume =
+                    Number(volumeControl.value) / 100;
+
+                bell.volume = volume;
+
+                volumeValue.textContent =
+                    volumeControl.value + "%";
+
+                localStorage.setItem(
+                    "coastalPearlVolume",
+                    volumeControl.value
+                );
+
+            }
+
+
+            volumeControl.addEventListener(
+                "input",
+                updateVolume
+            );
+
+
+            /*
+             * Change custom sound
+             */
+
+            soundSelect.addEventListener(
+                "change",
+                function () {
+
+                    const sound =
+                        soundSelect.value;
+
+                    bell.src =
+                        window.COUNTER_CONFIG.soundPath +
+                        sound;
+
+                    bell.load();
+
+                    localStorage.setItem(
+                        "coastalPearlSound",
+                        sound
+                    );
+
+                }
+            );
+
+
+            /*
+             * Save ring count
+             */
+
+            repeatControl.addEventListener(
+                "change",
+                function () {
+
+                    localStorage.setItem(
+                        "coastalPearlRepeat",
+                        repeatControl.value
+                    );
+
+                }
+            );
+
+
+            /*
+             * Enable browser audio
+             */
+
+            enableButton.addEventListener(
+                "click",
+                async function () {
+
+                    try {
+
+                        bell.volume =
+                            Number(volumeControl.value) / 100;
+
+                        await bell.play();
+
+                        bell.pause();
+
+                        bell.currentTime = 0;
+
+                        ringerEnabled = true;
+
+                        ringerStatus.textContent =
+                            "● RINGER ON";
+
+                        ringerStatus.classList.remove(
+                            "off"
+                        );
+
+                        ringerStatus.classList.add(
+                            "on"
+                        );
+
+                        enableButton.textContent =
+                            "🔊 RINGER ENABLED";
+
+                        enableButton.classList.add(
+                            "active"
+                        );
+
+                    } catch (error) {
+
+                        console.error(
+                            "Unable to enable audio:",
+                            error
+                        );
+
+                        alert(
+                            "Please click the button again to enable the ringer."
+                        );
+
+                    }
+
+                }
+            );
+
+
+            /*
+             * Play customised restaurant sound
+             */
+
+            async function playCustomSound() {
+
+                if (!ringerEnabled) {
+
+                    alert(
+                        "Please click 'ENABLE RINGER' first."
+                    );
+
+                    return;
+
+                }
+
+
+                const count =
+                    Number(repeatControl.value);
+
+
+                for (
+                    let i = 0;
+                    i < count;
+                    i++
+                ) {
+
+                    bell.currentTime = 0;
+
+                    try {
+
+                        await bell.play();
+
+                        await new Promise(
+                            function (resolve) {
+
+                                bell.onended =
+                                    resolve;
+
+                            }
+                        );
+
+                    } catch (error) {
+
+                        console.error(
+                            "Sound playback failed:",
+                            error
+                        );
+
+                        break;
+
+                    }
+
+
+                    if (i < count - 1) {
+
+                        await new Promise(
+                            function (resolve) {
+
+                                setTimeout(
+                                    resolve,
+                                    250
+                                );
+
+                            }
+                        );
+
+                    }
+
+                }
+
+            }
+
+
+            /*
+             * Header test button
+             */
+
+            testButton.addEventListener(
+                "click",
+                playCustomSound
+            );
+
+
+            /*
+             * Settings test button
+             */
+
+            settingsTest.addEventListener(
+                "click",
+                playCustomSound
+            );
+
+
+            /*
+             * Global function.
+             *
+             * counter.js can call:
+             *
+             * window.playRestaurantBell()
+             */
+
+            window.playRestaurantBell =
+                function () {
+
+                    playCustomSound();
+
+                };
+
+
+            /*
+             * Show browser notification when
+             * a new table calls service.
+             */
+
+            window.showTableNotification =
+                function (table, type) {
+
+                    if (
+                        "Notification" in window &&
+                        Notification.permission === "granted"
+                    ) {
+
+                        new Notification(
+                            "Coastal Pearl · Table Call",
+                            {
+                                body:
+                                    table +
+                                    " · " +
+                                    type +
+                                    " requested",
+                                icon:
+                                    "{% static 'img/logo.png' %}"
+                            }
+                        );
+
+                    }
+
+                };
+
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>

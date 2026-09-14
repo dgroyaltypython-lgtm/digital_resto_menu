@@ -1,0 +1,544 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#071923">
+    <title>Coastal Pearl · Play While You Wait</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link href="{% static 'css/games.css' %}" rel="stylesheet">
+</head>
+
+<body class="game-page">
+
+    <!-- =========================================================
+         BACKGROUND ORBS
+    ========================================================== -->
+
+    <div class="game-orb game-orb-1"></div>
+    <div class="game-orb game-orb-2"></div>
+    <div class="game-orb game-orb-3"></div>
+
+
+    <!-- =========================================================
+         HEADER
+    ========================================================== -->
+
+    <header class="game-header">
+
+        <div class="glass-game header-card">
+
+            <div class="brand-area">
+
+                <div class="brand-eyebrow">
+                    GROUP OF BBN · COASTAL PEARL
+                </div>
+
+                <h1>
+                    🎮 Play While You Wait
+                </h1>
+
+                <span>
+                    Have a little fun while your food is being prepared.
+                </span>
+
+            </div>
+
+
+            <div class="table-badge">
+
+                <small>
+                    TABLE
+                </small>
+
+                <strong>
+                    {{ table }}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================================
+         MAIN CONTENT
+    ========================================================== -->
+
+    <main class="game-container">
+
+
+        <!-- =====================================================
+             GAME HERO
+        ====================================================== -->
+
+        <section id="gameChooser" class="glass-game game-hero">
+
+            <div class="hero-icon">
+                🌊
+            </div>
+
+            <div>
+
+                <div class="brand-eyebrow">
+                    COASTAL PEARL GAME LOUNGE
+                </div>
+
+                <h2>
+                    Pick a quick game
+                </h2>
+
+                <p>
+                    No account, no download and no ordering.
+                    Just tap, play and enjoy while the kitchen
+                    prepares your food.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             GAME SELECTION
+        ====================================================== -->
+
+        <section class="game-section">
+
+            <div class="section-title">
+
+                <div>
+
+                    <small>
+                        10 QUICK GAMES
+                    </small>
+
+                    <h3>
+                        Choose your challenge
+                    </h3>
+
+                </div>
+
+                <span>
+                    Touch friendly · No download
+                </span>
+
+            </div>
+
+
+            <div id="gameGrid" class="game-grid">
+
+
+                <!-- =================================================
+                     1. MEMORY MATCH
+                ================================================== -->
+
+                <button type="button" class="game-card glass-game" data-game="memory">
+
+                    <span class="game-card-icon">
+                        🧠
+                    </span>
+
+                    <span class="game-card-content">
+
+                        <strong>
+                            Memory Match
+                        </strong>
+
+                        <small>
+                            Match all the coastal pairs.
+                        </small>
+
+                    </span>
+
+                    <span class="play-arrow">
+                        →
+                    </span>
+
+                </button>
+
+
+
+                <!-- =================================================
+                     2. COCONUT TAP
+                ================================================== -->
+
+                <button type="button" class="game-card glass-game" data-game="coconut">
+
+                    <span class="game-card-icon">
+                        🥥
+                    </span>
+
+                    <span class="game-card-content">
+
+                        <strong>
+                            Coconut Tap
+                        </strong>
+
+                        <small>
+                            Tap the coconut as fast as you can.
+                        </small>
+
+                    </span>
+
+                    <span class="play-arrow">
+                        →
+                    </span>
+
+                </button>
+
+
+
+                <!-- =================================================
+                     3. CATCH THE FISH
+                ================================================== -->
+
+                <button type="button" class="game-card glass-game" data-game="fish">
+
+                    <span class="game-card-icon">
+                        🐟
+                    </span>
+
+                    <span class="game-card-content">
+
+                        <strong>
+                            Catch the Fish
+                        </strong>
+
+                        <small>
+                            Catch as many fish as possible.
+                        </small>
+
+                    </span>
+
+                    <span class="play-arrow">
+                        →
+                    </span>
+
+                </button>
+
+
+
+                <!-- =================================================
+                     4. QUICK REACTION
+                ================================================== -->
+
+                <button type="button" class="game-card glass-game" data-game="reaction">
+
+                    <span class="game-card-icon">
+                        ⚡
+                    </span>
+
+                    <span class="game-card-content">
+
+                        <strong>
+                            Quick Reaction
+                        </strong>
+
+                        <small>
+                            Wait for green and tap instantly.
+                        </small>
+
+                    </span>
+
+                    <span class="play-arrow">
+                        →
+                    </span>
+
+                </button>
+
+
+
+                <!-- =================================================
+                     5. WHACK A CRAB
+                ================================================== -->
+
+                <button type="button" class="game-card glass-game" data-game="crab">
+
+                    <span class="game-card-icon">
+                        🦀
+                    </span>
+
+                    <span class="game-card-content">
+
+                        <strong>
+                            Whack-a-Crab
+                        </strong>
+
+                        <small>
+                            Tap the crab before it disappears.
+                        </small>
+
+                    </span>
+
+                    <span class="play-arrow">
+                        →
+                    </span>
+
+                </button>
+
+
+
+                <!-- =================================================
+                     6. SHELL SHUFFLE
+                ================================================== -->
+
+                <button type="button" class="game-card glass-game" data-game="shell">
+
+                    <span class="game-card-icon">
+                        🐚
+                    </span>
+
+                    <span class="game-card-content">
+
+                        <strong>
+                            Shell Shuffle
+                        </strong>
+
+                        <small>
+                            Find the hidden pearl.
+                        </small>
+
+                    </span>
+
+                    <span class="play-arrow">
+                        →
+                    </span>
+
+                </button>
+
+
+
+                <!-- =================================================
+                     7. NUMBER RUSH
+                ================================================== -->
+
+                <button type="button" class="game-card glass-game" data-game="number">
+
+                    <span class="game-card-icon">
+                        🔢
+                    </span>
+
+                    <span class="game-card-content">
+
+                        <strong>
+                            Number Rush
+                        </strong>
+
+                        <small>
+                            Tap numbers from 1 to 12 in order.
+                        </small>
+
+                    </span>
+
+                    <span class="play-arrow">
+                        →
+                    </span>
+
+                </button>
+
+
+
+                <!-- =================================================
+                     8. COLOR MATCH
+                ================================================== -->
+
+                <button type="button" class="game-card glass-game" data-game="color">
+
+                    <span class="game-card-icon">
+                        🎨
+                    </span>
+
+                    <span class="game-card-content">
+
+                        <strong>
+                            Color Match
+                        </strong>
+
+                        <small>
+                            Tap the button matching the target color.
+                        </small>
+
+                    </span>
+
+                    <span class="play-arrow">
+                        →
+                    </span>
+
+                </button>
+
+
+
+                <!-- =================================================
+                     9. OCEAN DODGE
+                ================================================== -->
+
+                <button type="button" class="game-card glass-game" data-game="dodge">
+
+                    <span class="game-card-icon">
+                        🚤
+                    </span>
+
+                    <span class="game-card-content">
+
+                        <strong>
+                            Ocean Dodge
+                        </strong>
+
+                        <small>
+                            Move the boat and avoid the waves.
+                        </small>
+
+                    </span>
+
+                    <span class="play-arrow">
+                        →
+                    </span>
+
+                </button>
+
+
+
+                <!-- =================================================
+                     10. BUBBLE POP
+                ================================================== -->
+
+                <button type="button" class="game-card glass-game" data-game="pop">
+
+                    <span class="game-card-icon">
+                        🫧
+                    </span>
+
+                    <span class="game-card-content">
+
+                        <strong>
+                            Bubble Pop
+                        </strong>
+
+                        <small>
+                            Pop bubbles before the timer ends.
+                        </small>
+
+                    </span>
+
+                    <span class="play-arrow">
+                        →
+                    </span>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             GAME PLAY PANEL
+        ====================================================== -->
+
+        <section id="gamePanel" class="glass-game game-panel d-none">
+
+
+            <!-- GAME PANEL HEADER -->
+
+            <div class="game-panel-head">
+
+
+                <!-- BACK TO GAME LIST -->
+
+                <button type="button" id="backToGames" class="game-small-btn">
+                    ← Games
+                </button>
+
+
+                <!-- GAME TITLE -->
+
+                <div class="game-heading">
+
+                    <div id="gameEyebrow" class="brand-eyebrow">
+                        GAME
+                    </div>
+
+                    <h3 id="gameName">
+                        Game
+                    </h3>
+
+                </div>
+
+
+                <!-- SCORE -->
+
+                <div class="score-pill">
+
+                    SCORE
+
+                    <b id="score">
+                        0
+                    </b>
+
+                </div>
+
+            </div>
+
+
+            <!-- GAME AREA -->
+
+            <div id="gameStage" class="game-stage"></div>
+
+
+            <!-- GAME MESSAGE -->
+
+            <div id="gameMessage" class="game-message"></div>
+
+
+            <!-- PLAY AGAIN -->
+
+            <button type="button" id="playAgain" class="play-again">
+                ▶ PLAY AGAIN
+            </button>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             BACK TO MENU
+        ====================================================== -->
+
+        <a class="back-menu" href="{% url 'portal:menu' %}?table={{ table|urlencode }}">
+            ← Back to Coastal Pearl Menu
+        </a>
+
+    </main>
+
+
+
+    <!-- =========================================================
+         TABLE NUMBER FOR JAVASCRIPT
+    ========================================================== -->
+
+    <script>
+        window.TABLE_NO = "{{ table|escapejs }}";
+    </script>
+
+
+
+    <!-- =========================================================
+         GAME JAVASCRIPT
+    ========================================================== -->
+
+    <script src="{% static 'js/games.js' %}"></script>
+
+</body>
+
+</html>
